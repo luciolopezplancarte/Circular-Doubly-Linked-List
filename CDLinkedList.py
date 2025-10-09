@@ -5,14 +5,15 @@ class CDLL:
         Constructor for the clas. It initialized the head, tail and size.
         For an empty CDLL, the head and tail are None.
         """
-        self.head = None
-        self.tail = None
-        self.size = 0
+        self._head = None
+        self._tail = None
+        self._size = 0
 
     def __len__(self):
         """
         Method to return the length of the list
         """
+        return self._size
 
     def isEmpty(self):
         """
