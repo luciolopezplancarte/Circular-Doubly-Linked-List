@@ -1,3 +1,4 @@
+from Node import Node
 class CDLL:
 
     def __init__(self):
@@ -65,6 +66,26 @@ class CDLL:
             data: The data to store in the list
 
         """
+        new_node = Node(data)
+        if self.isEmpty():
+            print(f"LIST IS EMPTY: ADDING NODE {data}")
+            self._head = new_node
+            self._tail = new_node
+            self._head.prev = self._tail
+            self._tail.next = self._head
+            print(self._tail.data)
+
+        else:
+            print(f"Adding {data} to List")
+            new_node.prev = self._tail
+            new_node.next = self._head
+            self._tail.next = new_node
+            self._head.prev = new_node
+            self._tail = new_node
+            print(self._tail.data)
+
+        self._size +=1
+
 
 
     def prepend(self, data):
@@ -80,6 +101,26 @@ class CDLL:
             data: The data to store in the list
 
         """
+        new_node = Node(data)
+        if self.isEmpty():
+            print(f"LIST IS EMPTY: ADDING NODE {data}")
+            self._head = new_node
+            self._tail = new_node
+            self._head.prev = self._tail
+            self._tail.next = self._head
+            print(self._head.data)
+
+        else:
+            print(f"Adding {data} to List")
+            new_node.prev=  self._tail
+            new_node.next = self._head
+            self._tail.next = new_node
+            self._head.prev = new_node
+            self._tail = new_node
+        print(self._head.data)
+
+        self._size +=1
+
 
     def insert_after(self, exisiting_value, data):
         """
@@ -207,6 +248,18 @@ class CDLL:
         This method returns a String with the representation of the list
         For example, [1 2 3 4]
         """
+        if self._head == None:
+            return "[ ]"
 
-
-
+        current = self._head
+        count = 0
+        output_str = "[ "
+        print(f"Current node: {current.data}")
+        while count < len(self):
+            output_str += str(current.data)
+            if count < len(self) -1:
+                output_str += " "
+            current = current.next
+            count +=1
+        output_str += "]"
+        return output_str
