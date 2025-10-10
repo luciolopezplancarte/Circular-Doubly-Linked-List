@@ -9,8 +9,10 @@ num_list.append(2)
 num_list.append(3)
 num_list.append(4)
 num_list.prepend(5)
-
 print(f"Length: {len(num_list)}")
 print(num_list)
 print("-"*50)
+num_list.remove(3)
+print(len(num_list))
+print(num_list)
 

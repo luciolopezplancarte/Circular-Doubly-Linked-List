@@ -39,11 +39,11 @@ class CDLL:
         if self.isEmpty():
             return None
 
-        self._head = current
+        current =self._head
         count = 0
         while count <= len(self):
             if current.data == value:
-                return current.data
+                return current
             current = current.next
         return None
         
@@ -181,6 +181,39 @@ class CDLL:
             value_to_remove: any The data value of the node to be removed
 
         """
+        if self.isEmpty():
+            return
+
+        if len(self) == 1:
+            self._head = None
+            self._tail = None
+            self._size = 0
+            return
+
+        node_to_remove = self._find_node_by_value(value_to_remove)
+        if node_to_remove == None:
+            print(f"Node with value {value_to_remove} not found. Cannot remove.")
+            return
+
+        
+        if self._head == node_to_remove:
+            new_head = self._head.next
+            self._tail.next = new_head
+            new_head.prev = self._tail
+           self._head = new_head
+        
+        elif self._tail == node_to_remove:
+            new_tail = self._tail.prev
+            self._head.prev = new_tail
+            new_tail.next = self._head
+           self._tail = new_tail
+
+        else:
+            node_to_remove.next.prev = node_to_remove.prev
+            node_to_remove.prev.next = node_to_remove.next
+        
+        self._size -= 1
+
 
     def remove_by_index(self,index):
         """
