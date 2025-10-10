@@ -20,6 +20,9 @@ class CDLL:
         Method to check if the list is empty
         The method returns True or False
         """
+        if len(self) == 0:
+            return True
+        return False
 
     def _find_node_by_value(self,value):
         """
@@ -32,7 +35,17 @@ class CDLL:
             value: any. The value to search in the list
         
         """
+        if self.isEmpty():
+            return None
 
+        self._head = current
+        count = 0
+        while count <= len(self):
+            if current.data == value:
+                return current.data
+            current = current.next
+        return None
+        
     def reverse(self):
         """
         Method to reverse the order of the list
@@ -52,6 +65,7 @@ class CDLL:
             data: The data to store in the list
 
         """
+
 
     def prepend(self, data):
         """
