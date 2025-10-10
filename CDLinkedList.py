@@ -116,7 +116,7 @@ class CDLL:
             new_node.next = self._head
             self._tail.next = new_node
             self._head.prev = new_node
-            self._tail = new_node
+            self._head = new_node
         print(self._head.data)
 
         self._size +=1
@@ -143,7 +143,7 @@ class CDLL:
 
         """
 
-    def insert_befor(self, exisiting_value, data):
+    def insert_before(self, exisiting_value, data):
         """
         Method to insert node before another node
         The method recieves a value for an exisiting node and the data to insert as the new node
@@ -248,12 +248,12 @@ class CDLL:
         This method returns a String with the representation of the list
         For example, [1 2 3 4]
         """
-        if self._head == None:
+        if self.isEmpty():
             return "[ ]"
 
         current = self._head
         count = 0
-        output_str = "[ "
+        output_str = "["
         print(f"Current node: {current.data}")
         while count < len(self):
             output_str += str(current.data)
