@@ -45,6 +45,7 @@ class CDLL:
             if current.data == value:
                 return current
             current = current.next
+            count += 1
         return None
         
     def reverse(self):
@@ -68,21 +69,17 @@ class CDLL:
         """
         new_node = Node(data)
         if self.isEmpty():
-            print(f"LIST IS EMPTY: ADDING NODE {data}")
             self._head = new_node
             self._tail = new_node
             self._head.prev = self._tail
             self._tail.next = self._head
-            print(self._tail.data)
 
         else:
-            print(f"Adding {data} to List")
             new_node.prev = self._tail
             new_node.next = self._head
             self._tail.next = new_node
             self._head.prev = new_node
             self._tail = new_node
-            print(self._tail.data)
 
         self._size +=1
 
@@ -103,21 +100,17 @@ class CDLL:
         """
         new_node = Node(data)
         if self.isEmpty():
-            print(f"LIST IS EMPTY: ADDING NODE {data}")
             self._head = new_node
             self._tail = new_node
             self._head.prev = self._tail
             self._tail.next = self._head
-            print(self._head.data)
 
         else:
-            print(f"Adding {data} to List")
             new_node.prev=  self._tail
             new_node.next = self._head
             self._tail.next = new_node
             self._head.prev = new_node
             self._head = new_node
-        print(self._head.data)
 
         self._size +=1
 
@@ -200,13 +193,13 @@ class CDLL:
             new_head = self._head.next
             self._tail.next = new_head
             new_head.prev = self._tail
-           self._head = new_head
+            self._head = new_head
         
         elif self._tail == node_to_remove:
             new_tail = self._tail.prev
             self._head.prev = new_tail
             new_tail.next = self._head
-           self._tail = new_tail
+            self._tail = new_tail
 
         else:
             node_to_remove.next.prev = node_to_remove.prev
@@ -228,6 +221,25 @@ class CDLL:
             index: int. The 'index' (position) of the node to remove
 
         """
+        if self.isEmpty():
+            print("List is empty. Cannot remove by index.")
+            return
+        elif len(self) < index or index < 0:
+            print("Index to remove out of bounds.")
+            return
+        else:
+            if index == 0:
+                self.remove(self._head)
+            elif index == len(self) -1:
+                self.remove(self._tail)
+            else:
+                count = 0
+                current = self._head
+                while count < index:
+                    current = current.next
+                    count +=1
+                self.remove(current.data)
+
 
     def remove_before(self, value):
         """
@@ -287,7 +299,6 @@ class CDLL:
         current = self._head
         count = 0
         output_str = "["
-        print(f"Current node: {current.data}")
         while count < len(self):
             output_str += str(current.data)
             if count < len(self) -1:
