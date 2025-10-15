@@ -136,6 +136,26 @@ class CDLL:
 
         """
 
+        _target_node = self._find_node_by_value(exisiting_value)
+        if self.isEmpty() or _target_node == self._tail:
+            self.append(data)
+            return
+
+        if _target_node is None:
+            print(f"Node with value {exisiting_value} not found. Cannot insert after.")
+            return
+        else:
+            new_node = Node(data)
+            new_node.next = _target_node.next
+            new_node.prev = _target_node
+            _target_node.next.prev = new_node
+            _target_node.next = new_node
+            self._size +=1
+            return
+                       
+
+
+
     def insert_before(self, exisiting_value, data):
         """
         Method to insert node before another node
@@ -156,6 +176,23 @@ class CDLL:
             data: The data for the new node to be inserted
 
         """
+        
+        _target_node = self._find_node_by_value(exisiting_value)
+        if self.isEmpty() or _target_node == self._head:
+            self.prepend(data)
+            return
+
+        if _target_node is None:
+            print(f"Node with value {exisiting_value} not found. Cannot insert before.")
+            return
+        else:
+            new_node = Node(data)
+            new_node.next = _target_node
+            new_node.prev = _target_node.prev
+            _target_node.prev.next = new_node
+            _target_node.prev = new_node
+            self._size +=1
+            return
 
     def remove(self, value_to_remove):
         """
