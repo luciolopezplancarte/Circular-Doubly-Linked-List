@@ -53,7 +53,22 @@ class CDLL:
         Method to reverse the order of the list
         If the list is empty or with only one element, it just return
         """
+        if self.isEmpty() or self._size == 1:
+            return
 
+        curr = self._head
+        temp = None
+        while True:
+            temp = curr.next
+            curr.next = curr.prev
+            curr.prev = temp
+            curr = temp
+            if curr == self._head:
+                break
+        self._head, self._tail = self._tail, self._head
+        return
+
+            
     def append(self, data):
         """
         Method to append a new node to the end of the list.
@@ -178,12 +193,15 @@ class CDLL:
         """
         
         _target_node = self._find_node_by_value(exisiting_value)
-        if self.isEmpty() or _target_node == self._head:
-            self.prepend(data)
+        if self.isEmpty():
+            self.append(data)
             return
 
         if _target_node is None:
             print(f"Node with value {exisiting_value} not found. Cannot insert before.")
+            return
+        elif _target_node == self._head:
+            self.prepend(data)
             return
         else:
             new_node = Node(data)
@@ -192,7 +210,7 @@ class CDLL:
             _target_node.prev.next = new_node
             _target_node.prev = new_node
             self._size +=1
-            return
+        return
 
     def remove(self, value_to_remove):
         """
@@ -301,12 +319,9 @@ class CDLL:
         if _target_node is None:
             print(f"Node with value {value} not found. Cannot remove before.")
             return
-        elif _target_node == self._head or _target_node.prev == self._tail:
+        else:
             self.remove(_target_node.prev.data)
             return
-        else:
-            _target_node.prev = _target_node.prev.prev
-            _target_node.prev.prev.next = _target_node
 
 
     def remove_after(self, value):
@@ -325,6 +340,7 @@ class CDLL:
             current_node: any. The data of the current node
 
         """
+        
         _target_node = self._find_node_by_value(value)
         if self.isEmpty() or self._size == 1:
             return
@@ -332,12 +348,9 @@ class CDLL:
         if _target_node is None:
             print(f"Node with value {value} not found. Cannot remove after.")
             return
-        elif _target_node == self._tail or _target_node.next == self._tail:
+        else:
             self.remove(_target_node.next.data)
             return
-        else:
-            _target_node.next = _target_node.next.next
-            _target_node.next.next.prev = _target_node
 
 
 
@@ -353,6 +366,16 @@ class CDLL:
         value: any. The data of the node to find.
 
         """
+        if self.isEmpty():
+            return -1
+        current = self._head
+        count = 0;
+        while count <= len(self):
+            if current.data == value:
+                return count
+            current = current.next
+            count +=1
+        return -1
 
     def __str__(self):
         """
