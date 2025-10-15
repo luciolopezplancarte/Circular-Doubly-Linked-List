@@ -36,11 +36,11 @@ print("=" *50)
 #print(f"Position of 5: {num_list.search(5)}") #1
 #print(f"Position of 10: {num_list.search(10)}") #-1
 
-#num_list.remove_before(4) 
+num_list.remove_before(4) 
 print(num_list)
 print(len(num_list))
 
-#num_list.remove_after(6)
+num_list.remove_after(6)
 print(num_list)
 print(len(num_list))
 #num_list.remove_after(5)

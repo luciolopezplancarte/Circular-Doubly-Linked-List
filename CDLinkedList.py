@@ -294,6 +294,20 @@ class CDLL:
             current_node: any. The data of the current node
 
         """
+        _target_node = self._find_node_by_value(value)
+        if self.isEmpty() or self._size == 1:
+            return
+        
+        if _target_node is None:
+            print(f"Node with value {value} not found. Cannot remove before.")
+            return
+        elif _target_node == self._head or _target_node.prev == self._tail:
+            self.remove(_target_node.prev.data)
+            return
+        else:
+            _target_node.prev = _target_node.prev.prev
+            _target_node.prev.prev.next = _target_node
+
 
     def remove_after(self, value):
         """
@@ -311,6 +325,22 @@ class CDLL:
             current_node: any. The data of the current node
 
         """
+        _target_node = self._find_node_by_value(value)
+        if self.isEmpty() or self._size == 1:
+            return
+        
+        if _target_node is None:
+            print(f"Node with value {value} not found. Cannot remove after.")
+            return
+        elif _target_node == self._tail or _target_node.next == self._tail:
+            self.remove(_target_node.next.data)
+            return
+        else:
+            _target_node.next = _target_node.next.next
+            _target_node.next.next.prev = _target_node
+
+
+
 
     def search(self, value):
         """
