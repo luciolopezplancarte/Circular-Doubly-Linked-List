@@ -56,16 +56,18 @@ class CDLL:
         if self.isEmpty() or self._size == 1:
             return
 
-        curr = self._head
-        temp = None
-        while True:
-            temp = curr.next
-            curr.next = curr.prev
-            curr.prev = temp
-            curr = temp
-            if curr == self._head:
+        curr = self._head #traversing pointer
+        temp = None #temporarily holds a node
+        while True: 
+            temp = curr.next 
+            curr.next = curr.prev 
+            curr.prev = temp 
+            curr = temp 
+            if curr == self._head: #breaks out of while loop when we get back to the head
                 break
-        self._head, self._tail = self._tail, self._head
+        temp = self._head 
+        self._head = self._tail 
+        self._tail = temp  
         return
 
             
@@ -384,7 +386,7 @@ class CDLL:
         For example, [1 2 3 4]
         """
         if self.isEmpty():
-            return "[ ]"
+            return "[]"
 
         current = self._head
         count = 0
